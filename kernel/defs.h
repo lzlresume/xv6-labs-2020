@@ -182,6 +182,13 @@ void            vmprint(pagetable_t pagetable);
 pagetable_t     proc_kpt_init(void); // 用于内核页表的初始化
 void            proc_inithart(pagetable_t); // 将进程的内核页表保存到SATP寄存器
 void            uvmmap(pagetable_t pagetable, uint64 va, uint64 pa, uint64 sz, int perm);
+void            u2kvmcopy(pagetable_t pagetable, pagetable_t kernelpt, uint64 oldsz, uint64 newsz);
+
+
+// vmcopyin.c
+int             copyin_new(pagetable_t, char *, uint64, uint64);
+int             copyinstr_new(pagetable_t, char *, uint64, uint64);
+
 
 // plic.c
 void            plicinit(void);
