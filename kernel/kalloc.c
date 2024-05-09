@@ -98,7 +98,6 @@ kalloc(void)
 
   push_off();// 关中断
   int id = cpuid();
-  pop_off();  //开中断
   acquire(&kmem[id].lock);
   r = kmem[id].freelist;
   if(r)
@@ -120,6 +119,7 @@ kalloc(void)
     }
   }
   release(&kmem[id].lock);
+  pop_off();  //开中断
   
 
   if(r)
